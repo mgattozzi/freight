@@ -69,28 +69,28 @@ impl RustcBuilder {
         self.edition = Some(edition);
         self
     }
-    pub fn out_dir(mut self, out_dir: PathBuf) -> Self {
-        self.out_dir = Some(out_dir);
+    pub fn out_dir(mut self, out_dir: impl Into<PathBuf>) -> Self {
+        self.out_dir = Some(out_dir.into());
         self
     }
-    pub fn lib_dir(mut self, lib_dir: PathBuf) -> Self {
-        self.lib_dir = Some(lib_dir);
+    pub fn lib_dir(mut self, lib_dir: impl Into<PathBuf>) -> Self {
+        self.lib_dir = Some(lib_dir.into());
         self
     }
-    pub fn crate_name(mut self, crate_name: String) -> Self {
-        self.crate_name = Some(crate_name);
+    pub fn crate_name(mut self, crate_name: impl Into<String>) -> Self {
+        self.crate_name = Some(crate_name.into());
         self
     }
     pub fn crate_type(mut self, crate_type: CrateType) -> Self {
         self.crate_type = Some(crate_type);
         self
     }
-    pub fn cfg(mut self, cfg: String) -> Self {
-        self.cfg.push(cfg);
+    pub fn cfg(mut self, cfg: impl Into<String>) -> Self {
+        self.cfg.push(cfg.into());
         self
     }
-    pub fn externs(mut self, r#extern: String) -> Self {
-        self.externs.push(r#extern);
+    pub fn externs(mut self, r#extern: impl Into<String>) -> Self {
+        self.externs.push(r#extern.into());
         self
     }
 
