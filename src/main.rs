@@ -37,7 +37,26 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
     #[cfg(stage1)]
     {
-        println!("Bootstrapped successfully!");
+        use std::env;
+        use std::process;
+
+        const HELP: &str = "\
+          Alternative for Cargo\n\n\
+          Usage: freight [COMMAND] [OPTIONS]\n\n\
+          Commands:\n    \
+              help    Print out this message
+        ";
+
+        let mut args = env::args().skip(1);
+        match args.next().as_ref().map(String::as_str) {
+            Some("help") => println!("{HELP}"),
+            _ => {
+                println!("Unsupported command");
+                println!("{HELP}");
+
+                process::exit(1);
+            }
+        }
     }
 
     Ok(())

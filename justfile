@@ -1,6 +1,6 @@
 run: build
   ./target/bootstrap_stage0/freight_stage0
-  ./target/bootstrap_stage1/freight_stage1
+  ./target/bootstrap_stage1/freight_stage1 help
 build:
   mkdir -p target/bootstrap_stage0
   # Build crate dependencies
