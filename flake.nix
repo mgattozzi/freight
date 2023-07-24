@@ -21,6 +21,7 @@
       {
         devShells.default = mkShell {
           buildInputs = [
+            git
             just
             (rust-bin.stable."1.70.0".default.override {
               extensions = [ "rust-src" "rust-analyzer" ];
