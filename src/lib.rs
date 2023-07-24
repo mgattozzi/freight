@@ -8,8 +8,10 @@ use std::fmt::Display;
 use std::fs;
 use std::path::PathBuf;
 use std::process::Command;
+use std::str::FromStr;
 
-pub type Result<T> = std::result::Result<T, Box<dyn Error>>;
+pub type Result<T> = std::result::Result<T, BoxError>;
+pub type BoxError = Box<dyn Error>;
 
 pub fn build() -> Result<()> {
     let root_dir = root_dir()?;
@@ -198,6 +200,18 @@ impl Display for Edition {
             Self::E2021 => "2021",
         };
         write!(f, "{edition}")
+    }
+}
+
+impl FromStr for Edition {
+    type Err = BoxError;
+    fn from_str(input: &str) -> Result<Self> {
+        match input {
+            "2015" => Ok(Self::E2015),
+            "2018" => Ok(Self::E2018),
+            "2021" => Ok(Self::E2021),
+            edition => Err(format!("Edition {edition} is not supported").into()),
+        }
     }
 }
 
