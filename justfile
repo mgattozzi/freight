@@ -1,5 +1,4 @@
 run: build
-  ./target/bootstrap/freight build
   ./target/debug/freight help
 build:
   rm -rf target
@@ -10,3 +9,7 @@ build:
   # Create the executable
   rustc src/main.rs --edition 2021 --crate-type=bin --crate-name=freight \
     --out-dir=target/bootstrap -L target/bootstrap --extern freight
+  ./target/bootstrap/freight build
+test: build
+  mkdir -p target/test
+  ./target/debug/freight test
