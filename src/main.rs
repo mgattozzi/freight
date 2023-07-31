@@ -10,7 +10,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         Some("build") => freight::build()?,
         Some("test") => {
             freight::build_tests()?;
-            freight::run_tests()?
+            loop {
+                match args.next().as_ref().map(String::as_str) {
+                    Some("--") | None => break,
+                    _ => continue,
+                }
+            }
+            freight::run_tests(args.collect::<Vec<String>>())?
         }
         Some("help") => println!("{HELP}"),
         _ => {

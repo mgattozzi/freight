@@ -12,4 +12,7 @@ build:
   ./target/bootstrap/freight build
 test: build
   mkdir -p target/test
+  # Test that we can pass args to the tests
+  ./target/debug/freight test ignored-arg -- --list
+  # Actually run the tests
   ./target/debug/freight test
