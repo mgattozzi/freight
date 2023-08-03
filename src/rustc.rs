@@ -18,6 +18,22 @@ pub struct Rustc {
 }
 
 impl Rustc {
+    /// Create a builder type to build up commands to then invoke rustc with.
+    /// ```
+    /// # use std::error::Error;
+    /// # use freight::rustc::Rustc;
+    /// # use freight::rustc::Edition;
+    /// # use freight::rustc::CrateType;
+    /// # fn main() -> Result<(), Box<dyn Error>> {
+    ///     let builder = Rustc::builder()
+    ///       .edition(Edition::E2021)
+    ///       .crate_type(CrateType::Bin)
+    ///       .crate_name("freight")
+    ///       .out_dir(".")
+    ///       .lib_dir(".");
+    /// #   Ok(())
+    /// # }
+    /// ```
     pub fn builder() -> RustcBuilder {
         RustcBuilder {
             ..Default::default()
