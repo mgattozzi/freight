@@ -1,7 +1,14 @@
 # freight
 Learn how Cargo and other build tools/package managers work under the hood by building one
 
-Currently a WIP
+You can follow along through a series of posts being written about freight.
+Currently the following parts are available to read now:
+
+- [Part 1](https://blog.mgattozzi.dev/freight-part-1/)
+
+## Contributions
+Currently freight will not accept any external contributions as this is meant to be an educational
+project. The issue tracker is also closed for the same reasons as well.
 
 ## License
 Copyright 2023 Michael Gattozzi
