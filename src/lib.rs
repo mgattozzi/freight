@@ -97,6 +97,23 @@ fn test_compile(
     }
 }
 
+pub fn run(run_args: Vec<String>) -> Result<()> {
+    let root_dir = root_dir()?;
+    let main_rs = root_dir.join("src").join("main.rs");
+    if main_rs.exists() {
+        build()?;
+        let manifest = Manifest::parse_from_file(root_dir.join("Freight.toml"))?;
+        let target = root_dir.join("target");
+        let target_debug = target.join("debug");
+        let path = target_debug.join(manifest.crate_name);
+        Command::new(path).args(run_args).spawn()?.wait()?;
+
+        Ok(())
+    } else {
+        Err("Cannot call `freight run` if there is no binary to run".into())
+    }
+}
+
 pub fn build() -> Result<()> {
     let mut logger = Logger::new();
     let root_dir = root_dir()?;

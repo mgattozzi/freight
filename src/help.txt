@@ -3,6 +3,7 @@ Alternative for Cargo
 Usage: freight [COMMAND] [OPTIONS]
 
 Commands:
+    run      Build and run a Freight or Cargo Project
     build    Build a Freight or Cargo project
     test     Test a Freight or Cargo project
     help     Print out this message

@@ -1,5 +1,5 @@
 run: build
-  ./target/debug/freight help
+  ./target/debug/freight run help
 build:
   rm -rf target
   mkdir -p target/bootstrap
