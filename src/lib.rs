@@ -97,6 +97,31 @@ fn test_compile(
     }
 }
 
+pub fn init(path: impl AsRef<Path>) -> Result<()> {
+    let path = path.as_ref();
+    fs::write(path.join(".gitignore"), b"/target")?;
+    let src = path.join("src");
+    fs::create_dir_all(&src)?;
+    fs::write(
+        src.join("main.rs"),
+        b"fn main() {\n    println!(\"Hello, World!\");\n}\n",
+    )?;
+    if !Command::new("git")
+        .arg("init")
+        .arg(path)
+        .output()?
+        .status
+        .success()
+    {
+        return Err("git failed to initialize a repository".into());
+    }
+    let crate_name = path.file_name().unwrap().to_str().unwrap();
+    let toml = format!("name = \"{crate_name}\"\nedition = \"2021\"\n");
+    fs::write(path.join("Freight.toml"), toml.as_bytes())?;
+
+    Ok(())
+}
+
 pub fn run(run_args: Vec<String>) -> Result<()> {
     let root_dir = root_dir()?;
     let main_rs = root_dir.join("src").join("main.rs");
@@ -272,7 +297,7 @@ pub fn run_tests(test_args: Vec<String>) -> Result<()> {
     Ok(())
 }
 
-fn root_dir() -> Result<PathBuf> {
+pub fn root_dir() -> Result<PathBuf> {
     let current_dir = env::current_dir()?;
     for ancestor in current_dir.ancestors() {
         if ancestor.join("Freight.toml").exists() {

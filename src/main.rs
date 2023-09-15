@@ -7,6 +7,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut args = env::args().skip(1);
     match args.next().as_ref().map(String::as_str) {
+        Some("init") => freight::init(&env::current_dir()?)?,
         Some("run") => freight::run(args.collect::<Vec<String>>())?,
         Some("build") => freight::build()?,
         Some("doc") => {
