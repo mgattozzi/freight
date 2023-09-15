@@ -4,6 +4,7 @@ use std::fmt;
 use std::fmt::Display;
 use std::path::PathBuf;
 use std::process::Command;
+use std::process::ExitStatus;
 use std::str::FromStr;
 
 pub struct Rustc {
@@ -40,8 +41,8 @@ impl Rustc {
         }
     }
 
-    pub fn run(self, path: &str) -> Result<()> {
-        Command::new("rustc")
+    pub fn run(self, path: &str) -> Result<ExitStatus> {
+        let exit_status = Command::new("rustc")
             .arg(path)
             .arg("--edition")
             .arg(self.edition.to_string())
@@ -69,7 +70,7 @@ impl Rustc {
             .spawn()?
             .wait()?;
 
-        Ok(())
+        Ok(exit_status)
     }
 }
 

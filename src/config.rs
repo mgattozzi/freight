@@ -5,6 +5,7 @@ use std::fs;
 use std::path::Path;
 use std::str::FromStr;
 
+#[derive(Debug)]
 pub struct Manifest {
     pub crate_name: String,
     pub edition: Edition,

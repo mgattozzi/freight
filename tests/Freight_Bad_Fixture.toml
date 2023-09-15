@@ -1,0 +1,3 @@
+name = "freight"
+edition = "2021"
+bad_field = "An unsupported field"

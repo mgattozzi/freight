@@ -37,6 +37,13 @@ impl Logger {
         self.unit_test("src/lib.rs")?;
         Ok(())
     }
+    pub fn tests(&mut self, name: &str) -> Result<()> {
+        self.out.write_all(b"     Running ")?;
+        self.out.write_all(&format!("tests/{name}.rs").as_bytes())?;
+        self.out.write_all(b"\n")?;
+        self.out.flush()?;
+        Ok(())
+    }
     fn unit_test(&mut self, file: &str) -> Result<()> {
         self.out.write_all(b"     Running unittests ")?;
         self.out.write_all(file.as_bytes())?;
