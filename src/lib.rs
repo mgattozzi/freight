@@ -148,6 +148,28 @@ pub fn build() -> Result<()> {
     Ok(())
 }
 
+pub fn doc(_open: bool) -> Result<()> {
+    let root = root_dir()?;
+    let manifest = Manifest::parse_from_file(root.join("Freight.toml"))?;
+    let target = root.join("target");
+    let lib_path = target.join("debug");
+    let doc_path = target.join("doc");
+    if RustDoc::new(
+        manifest.edition,
+        manifest.crate_name,
+        lib_path,
+        Some(doc_path),
+    )
+    // TODO Fix no main.rs
+    .doc(root.join("src").join("lib.rs"))?
+    .success()
+    {
+        Ok(())
+    } else {
+        Err("Failed to document items".into())
+    }
+}
+
 pub fn build_tests() -> Result<()> {
     let mut logger = Logger::new();
     let root_dir = root_dir()?;
@@ -232,14 +254,20 @@ pub fn run_tests(test_args: Vec<String>) -> Result<()> {
     }
 
     let lib = root.join("src").join("lib.rs");
+    // TODO Fix no main.rs doc tests
     if lib.exists() {
         logger.doc_test(&manifest.crate_name)?;
-        RustDoc::new(
+        if !RustDoc::new(
             manifest.edition,
             manifest.crate_name,
             root.join("target").join("debug"),
+            None::<&str>,
         )
-        .test(lib)?;
+        .test(lib)?
+        .success()
+        {
+            return Err("Failed to run doc tests".into());
+        }
     }
     Ok(())
 }

@@ -6,4 +6,5 @@ Commands:
     run      Build and run a Freight or Cargo Project
     build    Build a Freight or Cargo project
     test     Test a Freight or Cargo project
+    doc      Build the docs for a Freight or Cargo Project
     help     Print out this message

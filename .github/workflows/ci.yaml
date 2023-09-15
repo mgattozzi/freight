@@ -16,3 +16,7 @@ jobs:
     - name: "Build and test Freight"
       run: "just test"
       shell: bash
+
+    - name: "Document Freight"
+      run: "just doc"
+      shell: bash

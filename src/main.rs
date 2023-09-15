@@ -9,6 +9,15 @@ fn main() -> Result<(), Box<dyn Error>> {
     match args.next().as_ref().map(String::as_str) {
         Some("run") => freight::run(args.collect::<Vec<String>>())?,
         Some("build") => freight::build()?,
+        Some("doc") => {
+            let open = args
+                .next()
+                .as_ref()
+                .map(String::as_str)
+                .map(|open| open == "--open")
+                .unwrap_or(false);
+            freight::doc(open)?
+        }
         Some("test") => {
             freight::build_tests()?;
             loop {
