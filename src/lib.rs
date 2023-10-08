@@ -30,8 +30,8 @@ fn lib_compile(
         .edition(manifest.edition)
         .crate_type(CrateType::Lib)
         .crate_name(&manifest.crate_name)
-        .out_dir(out_dir.clone())
-        .lib_dir(out_dir.clone())
+        .out_dir(out_dir)
+        .lib_dir(out_dir)
         .done()
         .run(lib_path.to_str().unwrap())?
         .success()
@@ -54,8 +54,8 @@ fn bin_compile(
         .edition(manifest.edition)
         .crate_type(CrateType::Bin)
         .crate_name(&manifest.crate_name)
-        .out_dir(out_dir.clone())
-        .lib_dir(out_dir.clone());
+        .out_dir(out_dir)
+        .lib_dir(out_dir);
 
     for ex in externs {
         builder = builder.externs(*ex);
@@ -82,8 +82,8 @@ fn test_compile(
             &manifest.crate_name,
             bin_path.file_stem().unwrap().to_str().unwrap()
         ))
-        .out_dir(out_dir.clone())
-        .lib_dir(out_dir.clone())
+        .out_dir(out_dir)
+        .lib_dir(out_dir)
         .test(true);
 
     for ex in externs {
