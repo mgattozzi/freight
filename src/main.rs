@@ -1,5 +1,6 @@
 use std::env;
 use std::error::Error;
+use std::fs;
 use std::process;
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -7,6 +8,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut args = env::args().skip(1);
     match args.next().as_ref().map(String::as_str) {
+        Some("new") => {
+            if let Some(dir) = &args.next() {
+                fs::create_dir_all(&dir)?;
+                freight::init(&dir)?;
+            } else {
+                println!("No directory given");
+                process::exit(1);
+            }
+        }
         Some("init") => freight::init(&env::current_dir()?)?,
         Some("run") => freight::run(args.collect::<Vec<String>>())?,
         Some("build") => freight::build()?,

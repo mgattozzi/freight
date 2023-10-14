@@ -3,6 +3,8 @@ Alternative for Cargo
 Usage: freight [COMMAND] [OPTIONS]
 
 Commands:
+    new      Create a new Freight Project with a given path
+    init     Create a new Freight Project in the current directory
     run      Build and run a Freight or Cargo Project
     build    Build a Freight or Cargo project
     test     Test a Freight or Cargo project
