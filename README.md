@@ -7,6 +7,8 @@ Currently the following parts are available to read now:
 - [Part 1](https://ductile.systems/freight-part-1/)
 - [Part 2](https://ductile.systems/lets-build-a-cargo-compatible-build-tool-part-2/)
 - [Part 3](https://ductile.systems/freight-part-3/)
+- [Part 4](https://ductile.systems/freight-part-4/)
+- [Part 5](https://ductile.systems/freight-part-5/)
 
 ## Contributions
 Currently freight will not accept any external contributions as this is meant to be an educational
